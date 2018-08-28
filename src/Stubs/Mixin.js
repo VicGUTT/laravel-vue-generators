@@ -1,18 +1,11 @@
 export default {
+    props: {},
     components: {},
 
     data () {
         return {
             //
         }
-    },
-
-    props: {
-        //
-    },
-
-    computed: {
-        //
     },
 
     created () {
@@ -25,5 +18,9 @@ export default {
 
     methods: {
         //
-    }
+    },
+
+    computed: {
+        //
+    },
 };

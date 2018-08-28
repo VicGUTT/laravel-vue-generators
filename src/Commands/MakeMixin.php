@@ -11,14 +11,14 @@ class MakeMixin extends VueGeneratorsCommand
      *
      * @var string
      */
-    protected $signature = 'vueg:mixin {name} {--empty} {--path=}';
+    protected $signature = 'vue:mixin {name} {--empty} {--simple} {--path=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new Vue js mixin file.';
+    protected $description = 'Create a new Vue.js mixin file.';
 
     /**
      * Execute the console command.
@@ -26,16 +26,16 @@ class MakeMixin extends VueGeneratorsCommand
     public function handle()
     {
         $filesystem = new Filesystem();
-
-        $name = $this->argument('name').'.js';
-
-        $path = $this->createPath($filesystem, 'mixin');
-
-        $fullPath = resource_path("{$path}/{$name}");
-
+        
+        $name       = $this->argument('name').'.js';
+        
+        $path       = $this->createPath($filesystem, 'mixin');
+        
+        $fullPath   = base_path("{$path}/{$name}");
+        
         $this->checkFileExists($filesystem, $fullPath, $name);
-
-        $stub = $this->getStub($filesystem);
+        
+        $stub       = $this->getStub($filesystem);
 
         $filesystem->put($fullPath, $stub);
 
@@ -51,7 +51,7 @@ class MakeMixin extends VueGeneratorsCommand
      */
     protected function getStub(Filesystem $filesystem)
     {
-        $fileName = $this->option('empty') ? 'EmptyMixin' : 'Mixin';
+        $fileName = ucfirst($this->option('empty') ? 'empty' : ($this->option('simple') ? 'simple' : '')) . 'Mixin';
 
         return $filesystem->get(__DIR__.'/../Stubs/'.$fileName.'.js');
     }

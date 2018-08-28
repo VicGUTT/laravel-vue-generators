@@ -11,14 +11,14 @@ class MakeComponent extends VueGeneratorsCommand
      *
      * @var string
      */
-    protected $signature = 'vueg:component {name} {--empty} {--path=}';
+    protected $signature = 'vue:component {name} {--empty} {--simple} {--path=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new Vue js component file.';
+    protected $description = 'Create a new Vue.js component file.';
 
     /**
      * Execute the console command.
@@ -26,16 +26,16 @@ class MakeComponent extends VueGeneratorsCommand
     public function handle()
     {
         $filesystem = new Filesystem();
-
-        $name = $this->argument('name').'.vue';
-
-        $path = $this->createPath($filesystem, 'component');
-
-        $fullPath = resource_path("{$path}/{$name}");
-
+        
+        $name       = $this->argument('name').'.vue';
+        
+        $path       = $this->createPath($filesystem, 'component');
+        
+        $fullPath   = base_path("{$path}/{$name}");
+        
         $this->checkFileExists($filesystem, $fullPath, $name);
-
-        $stub = $this->getStub($filesystem);
+        
+        $stub       = $this->getStub($filesystem);
 
         $filesystem->put($fullPath, $stub);
 
@@ -51,8 +51,8 @@ class MakeComponent extends VueGeneratorsCommand
      */
     protected function getStub(Filesystem $filesystem)
     {
-        $fileName = $this->option('empty') ? 'EmptyComponent' : 'Component';
-
+        $fileName = ucfirst($this->option('empty') ? 'empty' : ($this->option('simple') ? 'simple' : '')) . 'Component';
+        
         return $filesystem->get(__DIR__.'/../Stubs/'.$fileName.'.vue');
     }
 }

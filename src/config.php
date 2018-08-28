@@ -10,7 +10,10 @@ return [
     | resources directory.
     */
     'paths' => [
-        'components' => 'assets/js/components',
-        'mixins'     => 'assets/js/mixins',
+        'components' => 'frontend/src/components',
+        'mixins'     => 'frontend/src/mixins',
+        'views'      => 'frontend/src/views',
+        // 'components' => 'resources/assets/js/components',
+        // 'mixins'     => 'resources/assets/js/mixins',
     ],
 ];

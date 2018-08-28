@@ -23,7 +23,12 @@ class VueGeneratorsCommand extends Command
     {
         $customPath = $this->option('path');
 
-        $defaultPath = config("vue-generators.paths.{$type}s");
+        if (config("vue-generators.paths.{$type}s")) {
+            $defaultPath = config("vue-generators.paths.{$type}s");
+        } else {
+            $paths       = $filesystem->getRequire(base_path('vendor/zachleigh/laravel-vue-generators/src/config.php'));
+            $defaultPath = $paths['paths'][$type . 's'];
+        }
 
         $path = $customPath !== null ? $customPath : $defaultPath;
 

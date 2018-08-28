@@ -2,6 +2,7 @@
 
 namespace VueGenerators;
 
+use VueGenerators\Commands\MakeView;
 use VueGenerators\Commands\MakeMixin;
 use VueGenerators\Commands\MakeComponent;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -35,16 +36,22 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function registerCommands()
     {
-        $this->app->singleton('command.vueg.component', function ($app) {
+        $this->app->singleton('command.vue.component', function ($app) {
             return $app[MakeComponent::class];
         });
 
-        $this->app->singleton('command.vueg.mixin', function ($app) {
+        $this->app->singleton('command.vue.mixin', function ($app) {
             return $app[MakeMixin::class];
         });
 
-        $this->commands('command.vueg.component');
+        $this->app->singleton('command.vue.view', function ($app) {
+            return $app[MakeView::class];
+        });
 
-        $this->commands('command.vueg.mixin');
+        $this->commands('command.vue.component');
+
+        $this->commands('command.vue.mixin');
+
+        $this->commands('command.vue.view');
     }
 }

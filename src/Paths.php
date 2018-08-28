@@ -14,7 +14,7 @@ trait Paths
      */
     protected function buildPathFromArray($path, Filesystem $filesystem = null)
     {
-        $pathArray = collect(explode('/', $path))->prepend('resources');
+        $pathArray = collect(explode('/', $path))/*->prepend('resources')*/;
 
         if (is_null($filesystem)) {
             $filesystem = new Filesystem();

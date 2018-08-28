@@ -33,6 +33,14 @@
         }
     },
 
+    "extra": {
+        "laravel": {
+            "providers": [
+                "zachleigh\\laravel-vue-generators"
+            ]
+        }
+    },
+
     "scripts": {
         "test": "phpunit"
     },
